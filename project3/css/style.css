@@ -29,6 +29,12 @@ header, footer {
     width: auto;
     border-radius: 12px;
 }
+.header-flex {
+        display: flex;
+        align-itmes: center;
+        justify-content: space-between;
+        padding: 0 30px;
+}
 
 .header-title {
     text-align: center;
@@ -154,4 +160,5 @@ footer {
 .hyperlink-img:hover {
     box-shadow: 0 0 10px #ff0000;
 }
+
 
