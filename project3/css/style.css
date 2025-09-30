@@ -156,19 +156,20 @@ footer {
 .news-item, #featured-news {
     margin-bottom: 40px;
 }
-.caption {
+.caption a {
     color: #c0c0c0;
     text-decoration: none;
 }
 
-.caption :visited {
+.caption a:visited {
     color: #c0c0c0;
 }
 
-.caption :hover, a:focus {
+.caption a:hover, a:focus {
     color: #ff6600;
     text-decoration: underline;
 }
+
 
 
 
