@@ -157,17 +157,18 @@ footer {
     margin-bottom: 40px;
 }
 a {
-    color: #fff;
+    color: #c0c0c0;
     text-decoration: none;
 }
 
 a:visited {
-    color: #fff;
+    color: #c0c0c0;
 }
 
 a:hover, a:focus {
     color: #ff6600;
     text-decoration: underline;
 }
+
 
 
