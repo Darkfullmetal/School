@@ -1,6 +1,6 @@
 /* style.css */
 body {
-    font-family: Arial, sans-serif;
+    font-family: Verdana, sans-serif;
     background: url('https://github.com/Darkfullmetal/School/blob/main/project3/images/background.jpg?raw=true') no-repeat center center fixed; /*source: https://disturbed1.com/bad-man-kordhell-remix/*/
     background-size: cover;
     color: #f2f2f2;
@@ -155,5 +155,18 @@ footer {
 
 .news-item, #featured-news {
     margin-bottom: 40px;
+}
+a {
+    color: #f2f2f2;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #f2f2f2;
+}
+
+a:hover, a:focus {
+    color: #ff6600;
+    text-decoration: underline;
 }
 
