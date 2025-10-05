@@ -62,37 +62,9 @@
             </select>
         </form>
         <div class="gearswap-set-grid">
-            <table class="gearswap-grid-table">
-                <thead>
-                    <tr><th colspan="4">Blank</th></tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><input type="text" maxlength="10" pattern="[A-Za-z0-9\-\+]*" title="Main" placeholder="Main"></td>
-                        <td><input type="text" maxlength="10" pattern="[A-Za-z0-9\-\+]*" title="Sub" placeholder="Sub"></td>
-                        <td><input type="text" maxlength="10" pattern="[A-Za-z0-9\-\+]*" title="Range" placeholder="Range"></td>
-                        <td><input type="text" maxlength="10" pattern="[A-Za-z0-9\-\+]*" title="Ammo" placeholder="Ammo"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" maxlength="10" pattern="[A-Za-z0-9\-\+]*" title="Head" placeholder="Head"></td>
-                        <td><input type="text" maxlength="10" pattern="[A-Za-z0-9\-\+]*" title="Neck" placeholder="Neck"></td>
-                        <td><input type="text" maxlength="10" pattern="[A-Za-z0-9\-\+]*" title="Ear1" placeholder="Ear1"></td>
-                        <td><input type="text" maxlength="10" pattern="[A-Za-z0-9\-\+]*" title="Ear2" placeholder="Ear2"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" maxlength="10" pattern="[A-Za-z0-9\-\+]*" title="Body" placeholder="Body"></td>
-                        <td><input type="text" maxlength="10" pattern="[A-Za-z0-9\-\+]*" title="Hands" placeholder="Hands"></td>
-                        <td><input type="text" maxlength="10" pattern="[A-Za-z0-9\-\+]*" title="Ring1" placeholder="Ring1"></td>
-                        <td><input type="text" maxlength="10" pattern="[A-Za-z0-9\-\+]*" title="Ring2" placeholder="Ring2"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" maxlength="10" pattern="[A-Za-z0-9\-\+]*" title="Back" placeholder="Back"></td>
-                        <td><input type="text" maxlength="10" pattern="[A-Za-z0-9\-\+]*" title="Waist" placeholder="Waist"></td>
-                        <td><input type="text" maxlength="10" pattern="[A-Za-z0-9\-\+]*" title="Legs" placeholder="Legs"></td>
-                        <td><input type="text" maxlength="10" pattern="[A-Za-z0-9\-\+]*" title="Feet" placeholder="Feet"></td>
-                    </tr>
-                </tbody>
-            </table>
+            <div id="gearswap-sets-container"></div>
+            <button id="save-gearswap-btn" type="button">Save Sets for Job</button>
+            <div id="gearswap-save-status" style="margin-top:10px;color:green;display:none;">Saved!</div>
         </div>
         <script>
         // Check if user is signed in (simple localStorage flag)
@@ -117,7 +89,75 @@
                 }
             });
         }
-    // Optionally, you can add JS to update gear swap sets per job in future
+        // Per-job gear swap sets logic
+        const gearSlots = [
+            'Main', 'Sub', 'Range', 'Ammo',
+            'Head', 'Neck', 'Ear1', 'Ear2',
+            'Body', 'Hands', 'Ring1', 'Ring2',
+            'Back', 'Waist', 'Legs', 'Feet'
+        ];
+        const setNames = ['TP', 'WS', 'Idle', 'DT', 'Special'];
+        const jobSelect = document.getElementById('gs-job-select');
+        const setsContainer = document.getElementById('gearswap-sets-container');
+        const saveBtn = document.getElementById('save-gearswap-btn');
+        const saveStatus = document.getElementById('gearswap-save-status');
+
+        function createGearSetTable(setName, values) {
+            let html = `<table class='gearswap-grid-table'><thead><tr><th colspan='4'>${setName}</th></tr></thead><tbody>`;
+            for (let r = 0; r < 4; r++) {
+                html += '<tr>';
+                for (let c = 0; c < 4; c++) {
+                    let idx = r * 4 + c;
+                    let slot = gearSlots[idx];
+                    let val = values && values[slot] ? values[slot] : '';
+                    html += `<td><input type='text' maxlength='10' pattern='[A-Za-z0-9\-\+]*' title='${slot}' placeholder='${slot}' value='${val}'></td>`;
+                }
+                html += '</tr>';
+            }
+            html += '</tbody></table>';
+            return html;
+        }
+
+        function loadGearSetsForJob(job) {
+            let allSets = JSON.parse(localStorage.getItem('gearswapSets') || '{}');
+            let jobSets = allSets[job] || {};
+            setsContainer.innerHTML = '';
+            setNames.forEach(setName => {
+                let values = jobSets[setName] || {};
+                let setDiv = document.createElement('div');
+                setDiv.className = 'gearswap-set-block';
+                setDiv.innerHTML = createGearSetTable(setName, values);
+                setsContainer.appendChild(setDiv);
+            });
+        }
+
+        jobSelect.addEventListener('change', function() {
+            loadGearSetsForJob(jobSelect.value);
+            saveStatus.style.display = 'none';
+        });
+
+        saveBtn.addEventListener('click', function() {
+            let allSets = JSON.parse(localStorage.getItem('gearswapSets') || '{}');
+            let job = jobSelect.value;
+            let jobSets = {};
+            let setBlocks = setsContainer.getElementsByClassName('gearswap-set-block');
+            for (let i = 0; i < setNames.length; i++) {
+                let setName = setNames[i];
+                let inputs = setBlocks[i].getElementsByTagName('input');
+                let setVals = {};
+                for (let j = 0; j < gearSlots.length; j++) {
+                    setVals[gearSlots[j]] = inputs[j].value;
+                }
+                jobSets[setName] = setVals;
+            }
+            allSets[job] = jobSets;
+            localStorage.setItem('gearswapSets', JSON.stringify(allSets));
+            saveStatus.style.display = '';
+            setTimeout(() => { saveStatus.style.display = 'none'; }, 1500);
+        });
+
+        // Initial load
+        loadGearSetsForJob(jobSelect.value);
         </script>
     </main>
     <footer>
