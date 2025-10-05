@@ -19,53 +19,56 @@
         </nav>
     </header>
     <main>
-        <h2>My Wishlist (Up to 100 Items)</h2>
-        <div id="wishlist-locked" style="display:none; color:red; font-weight:bold;">You must be signed in to access your wishlist.</div>
-        <form id="wishlist-form" style="display:none;">
-            <label for="item-name">Item Name:</label>
-            <input type="text" id="item-name" name="item-name" maxlength="50" required>
-            <button type="submit">Add Item</button>
-            <button id="save-wishlist-btn" type="button" style="margin-left:10px;">Save Wishlist</button>
-            <span id="wishlist-save-status" style="margin-left:10px;color:green;display:none;">Saved!</span>
-        </form>
-        <ol class="wishlist-list" id="wishlist-list" style="display:none; margin-top:20px;">
-            <!-- Items will be rendered by JS -->
-        </ol>
-
-        <h2>Gear Swap Sets</h2>
-        <div style="margin-bottom:20px;">
-            <form id="gearswap-form" style="display:inline;">
-                <label for="gs-job-select">Select Job:</label>
-                <select id="gs-job-select" name="gs-job">
-                    <option value="Warrior">Warrior</option>
-                    <option value="Monk">Monk</option>
-                    <option value="White Mage">White Mage</option>
-                    <option value="Black Mage">Black Mage</option>
-                    <option value="Red Mage">Red Mage</option>
-                    <option value="Thief">Thief</option>
-                    <option value="Paladin">Paladin</option>
-                    <option value="Dark Knight">Dark Knight</option>
-                    <option value="Beastmaster">Beastmaster</option>
-                    <option value="Bard">Bard</option>
-                    <option value="Ranger">Ranger</option>
-                    <option value="Samurai">Samurai</option>
-                    <option value="Ninja">Ninja</option>
-                    <option value="Dragoon">Dragoon</option>
-                    <option value="Summoner">Summoner</option>
-                    <option value="Blue Mage">Blue Mage</option>
-                    <option value="Corsair">Corsair</option>
-                    <option value="Puppetmaster">Puppetmaster</option>
-                    <option value="Dancer">Dancer</option>
-                    <option value="Scholar">Scholar</option>
-                    <option value="Geomancer">Geomancer</option>
-                    <option value="Rune Fencer">Rune Fencer</option>
-                </select>
-            </form>
-        </div>
-        <div class="gearswap-set-grid">
-            <div id="gearswap-sets-container"></div>
-            <button id="save-gearswap-btn" type="button">Save Sets for Job</button>
-            <div id="gearswap-save-status" style="margin-top:10px;color:green;display:none;">Saved!</div>
+        <div class="wishlist-main-grid">
+            <div class="wishlist-left">
+                <h2>My Wishlist (Up to 100 Items)</h2>
+                <div id="wishlist-locked" style="display:none; color:red; font-weight:bold;">You must be signed in to access your wishlist.</div>
+                <form id="wishlist-form" style="display:none;">
+                    <label for="item-name">Item Name:</label>
+                    <input type="text" id="item-name" name="item-name" maxlength="50" required>
+                    <button type="submit">Add Item</button>
+                    <button id="save-wishlist-btn" type="button" style="margin-left:10px;">Save Wishlist</button>
+                    <span id="wishlist-save-status" style="margin-left:10px;color:green;display:none;">Saved!</span>
+                </form>
+                <ol class="wishlist-list" id="wishlist-list" style="display:none; margin-top:20px;">
+                    <!-- Items will be rendered by JS -->
+                </ol>
+            </div>
+            <div class="wishlist-right">
+                <h2>Gear Swap Sets</h2>
+                <form id="gearswap-form" style="display:inline;">
+                    <label for="gs-job-select">Select Job:</label>
+                    <select id="gs-job-select" name="gs-job">
+                        <option value="Warrior">Warrior</option>
+                        <option value="Monk">Monk</option>
+                        <option value="White Mage">White Mage</option>
+                        <option value="Black Mage">Black Mage</option>
+                        <option value="Red Mage">Red Mage</option>
+                        <option value="Thief">Thief</option>
+                        <option value="Paladin">Paladin</option>
+                        <option value="Dark Knight">Dark Knight</option>
+                        <option value="Beastmaster">Beastmaster</option>
+                        <option value="Bard">Bard</option>
+                        <option value="Ranger">Ranger</option>
+                        <option value="Samurai">Samurai</option>
+                        <option value="Ninja">Ninja</option>
+                        <option value="Dragoon">Dragoon</option>
+                        <option value="Summoner">Summoner</option>
+                        <option value="Blue Mage">Blue Mage</option>
+                        <option value="Corsair">Corsair</option>
+                        <option value="Puppetmaster">Puppetmaster</option>
+                        <option value="Dancer">Dancer</option>
+                        <option value="Scholar">Scholar</option>
+                        <option value="Geomancer">Geomancer</option>
+                        <option value="Rune Fencer">Rune Fencer</option>
+                    </select>
+                </form>
+                <div class="gearswap-set-grid">
+                    <div id="gearswap-sets-container"></div>
+                    <button id="save-gearswap-btn" type="button">Save Sets for Job</button>
+                    <div id="gearswap-save-status" style="margin-top:10px;color:green;display:none;">Saved!</div>
+                </div>
+            </div>
         </div>
         <script>
         // Check if user is signed in (simple localStorage flag)
