@@ -27,57 +27,9 @@
         }
         </script>
         <h2>FFXI Gear Swap Forum</h2>
-        <div class="forum-category">FFXI</div>
-        <table class="forum-index">
-            <thead>
-                <tr>
-                    <th>Forum</th>
-                    <th>Description</th>
-                    <th>Topics</th>
-                    <th>Posts</th>
-                    <th>Last Post</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>General</strong></td>
-                    <td>Anything related to FFXI.</td>
-                    <td>5</td>
-                    <td>12</td>
-                    <td><a href="#topic1">User123</a> - Oct 1, 2025</td>
-                </tr>
-                <tr>
-                    <td><strong>Jobs</strong></td>
-                    <td>Warrior, Monk, White Mage, ...</td>
-                    <td>3</td>
-                    <td>8</td>
-                    <td><a href="#topic3">MacroMaster</a> - Oct 3, 2025</td>
-                </tr>
-                <tr>
-                    <td><strong>Endgame</strong></td>
-                    <td>Omen, Ambuscade, Dynamis, etc.</td>
-                    <td>2</td>
-                    <td>5</td>
-                    <td><a href="#topic2">FarmerJoe</a> - Oct 2, 2025</td>
-                </tr>
-                <tr>
-                    <td><strong>Wishlist</strong></td>
-                    <td>Wishlist management and tips.</td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td><a href="#topic4">Wishful</a> - Oct 4, 2025</td>
-                </tr>
-                <tr>
-                    <td><strong>Events</strong></td>
-                    <td>Upcoming FFXI events.</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td><a href="#topic5">EventBot</a> - Oct 5, 2025</td>
-                </tr>
-            </tbody>
-        </table>
+        <!-- Latest Topics Table -->
         <div class="forum-category">Latest Topics</div>
-        <table class="forum-index">
+        <table id="forum-topics-table">
             <thead>
                 <tr>
                     <th>Topic</th>
@@ -119,6 +71,63 @@
                 </tr>
             </tbody>
         </table>
+        <!-- Forum Index Table -->
+        <div class="forum-category">FFXI Forums</div>
+        <table id="forum-groups-table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Forum</th>
+                    <th>Description</th>
+                    <th>Topics</th>
+                    <th>Posts</th>
+                    <th>Last Post</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="forum-group">
+                    <td><img src="https://static.ffxiah.com/images/icons/forum_general.png" alt="General" class="forum-icon"></td>
+                    <td class="forum-name">General</td>
+                    <td class="forum-desc">Anything related to FFXI.</td>
+                    <td class="forum-topics">5</td>
+                    <td class="forum-posts">12</td>
+                    <td class="forum-last-post"><a href="#topic1">User123</a> - Oct 1, 2025</td>
+                </tr>
+                <tr class="forum-group">
+                    <td><img src="https://static.ffxiah.com/images/icons/forum_jobs.png" alt="Jobs" class="forum-icon"></td>
+                    <td class="forum-name">Jobs</td>
+                    <td class="forum-desc">Warrior, Monk, White Mage, ...<br><span class="subforum">Subforums: <a href="#">Warrior</a>, <a href="#">Monk</a>, <a href="#">White Mage</a>, ...</span></td>
+                    <td class="forum-topics">3</td>
+                    <td class="forum-posts">8</td>
+                    <td class="forum-last-post"><a href="#topic3">MacroMaster</a> - Oct 3, 2025</td>
+                </tr>
+                <tr class="forum-group">
+                    <td><img src="https://static.ffxiah.com/images/icons/forum_endgame.png" alt="Endgame" class="forum-icon"></td>
+                    <td class="forum-name">Endgame</td>
+                    <td class="forum-desc">Omen, Ambuscade, Dynamis, etc.</td>
+                    <td class="forum-topics">2</td>
+                    <td class="forum-posts">5</td>
+                    <td class="forum-last-post"><a href="#topic2">FarmerJoe</a> - Oct 2, 2025</td>
+                </tr>
+                <tr class="forum-group">
+                    <td><img src="https://static.ffxiah.com/images/icons/forum_wishlist.png" alt="Wishlist" class="forum-icon"></td>
+                    <td class="forum-name">Wishlist</td>
+                    <td class="forum-desc">Wishlist management and tips.</td>
+                    <td class="forum-topics">1</td>
+                    <td class="forum-posts">2</td>
+                    <td class="forum-last-post"><a href="#topic4">Wishful</a> - Oct 4, 2025</td>
+                </tr>
+                <tr class="forum-group">
+                    <td><img src="https://static.ffxiah.com/images/icons/forum_events.png" alt="Events" class="forum-icon"></td>
+                    <td class="forum-name">Events</td>
+                    <td class="forum-desc">Upcoming FFXI events.</td>
+                    <td class="forum-topics">1</td>
+                    <td class="forum-posts">1</td>
+                    <td class="forum-last-post"><a href="#topic5">EventBot</a> - Oct 5, 2025</td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- Topic Details -->
         <div class="forum-topics">
             <section id="topic1">
                 <h3>Best gear for Rune Fencer</h3>
