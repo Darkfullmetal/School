@@ -27,10 +27,12 @@
         }
         </script>
         <h2>FFXI Gear Swap Forum</h2>
-        <div class="forum-category">FFXI</div>
+        <!-- Forum Index Table -->
+        <div class="forum-category">Forum Index</div>
         <table class="forum-index">
             <thead>
                 <tr>
+                    <th></th>
                     <th>Forum</th>
                     <th>Description</th>
                     <th>Topics</th>
@@ -40,6 +42,7 @@
             </thead>
             <tbody>
                 <tr>
+                    <td><img src="https://static.ffxiah.com/images/icons/forum_general.png" alt="General" class="forum-icon"></td>
                     <td><strong>General</strong></td>
                     <td>Anything related to FFXI.</td>
                     <td>5</td>
@@ -47,13 +50,15 @@
                     <td><a href="#topic1">User123</a> - Oct 1, 2025</td>
                 </tr>
                 <tr>
+                    <td><img src="https://static.ffxiah.com/images/icons/forum_jobs.png" alt="Jobs" class="forum-icon"></td>
                     <td><strong>Jobs</strong></td>
-                    <td>Warrior, Monk, White Mage, ...</td>
+                    <td>Warrior, Monk, White Mage, ...<br><span class="subforum">Subforums: <a href="#">Warrior</a>, <a href="#">Monk</a>, <a href="#">White Mage</a>, ...</span></td>
                     <td>3</td>
                     <td>8</td>
                     <td><a href="#topic3">MacroMaster</a> - Oct 3, 2025</td>
                 </tr>
                 <tr>
+                    <td><img src="https://static.ffxiah.com/images/icons/forum_endgame.png" alt="Endgame" class="forum-icon"></td>
                     <td><strong>Endgame</strong></td>
                     <td>Omen, Ambuscade, Dynamis, etc.</td>
                     <td>2</td>
@@ -61,6 +66,7 @@
                     <td><a href="#topic2">FarmerJoe</a> - Oct 2, 2025</td>
                 </tr>
                 <tr>
+                    <td><img src="https://static.ffxiah.com/images/icons/forum_wishlist.png" alt="Wishlist" class="forum-icon"></td>
                     <td><strong>Wishlist</strong></td>
                     <td>Wishlist management and tips.</td>
                     <td>1</td>
@@ -68,6 +74,7 @@
                     <td><a href="#topic4">Wishful</a> - Oct 4, 2025</td>
                 </tr>
                 <tr>
+                    <td><img src="https://static.ffxiah.com/images/icons/forum_events.png" alt="Events" class="forum-icon"></td>
                     <td><strong>Events</strong></td>
                     <td>Upcoming FFXI events.</td>
                     <td>1</td>
@@ -76,8 +83,9 @@
                 </tr>
             </tbody>
         </table>
+        <!-- Latest Topics Table -->
         <div class="forum-category">Latest Topics</div>
-        <table class="forum-index">
+        <table class="forum-latest">
             <thead>
                 <tr>
                     <th>Topic</th>
@@ -120,50 +128,55 @@
             </tbody>
         </table>
         <div class="forum-topics">
-            <section id="topic1">
+            <section id="topic1" class="forum-topic">
                 <h3>Best gear for Rune Fencer</h3>
                 <div class="post">
-                    <p><strong>Posted by:</strong> User123</p>
+                    <span class="author">User123</span>
+                    <span class="date">Oct 1, 2025</span>
                     <p>What is the best gear setup for Rune Fencer in current content?</p>
                 </div>
                 <div class="replies">
                     <p><strong>Reply:</strong> I recommend starting with Epeolatry and focusing on PDT/MDT sets.</p>
                 </div>
             </section>
-            <section id="topic2">
+            <section id="topic2" class="forum-topic">
                 <h3>How to farm Omen efficiently</h3>
                 <div class="post">
-                    <p><strong>Posted by:</strong> FarmerJoe</p>
+                    <span class="author">FarmerJoe</span>
+                    <span class="date">Oct 2, 2025</span>
                     <p>Any tips for maximizing Omen farming runs?</p>
                 </div>
                 <div class="replies">
                     <p><strong>Reply:</strong> Bring a THF for extra drops and use Omen lights wisely.</p>
                 </div>
             </section>
-            <section id="topic3">
+            <section id="topic3" class="forum-topic">
                 <h3>Job-specific gear swap macros</h3>
                 <div class="post">
-                    <p><strong>Posted by:</strong> MacroMaster</p>
+                    <span class="author">MacroMaster</span>
+                    <span class="date">Oct 3, 2025</span>
                     <p>Share your favorite gearswap macros for different jobs!</p>
                 </div>
                 <div class="replies">
                     <p><strong>Reply:</strong> I use GS for RUN, PLD, and WHM. Can share my XMLs if interested.</p>
                 </div>
             </section>
-            <section id="topic4">
+            <section id="topic4" class="forum-topic">
                 <h3>Wishlist management tips</h3>
                 <div class="post">
-                    <p><strong>Posted by:</strong> Wishful</p>
+                    <span class="author">Wishful</span>
+                    <span class="date">Oct 4, 2025</span>
                     <p>How do you keep track of gear wishlists?</p>
                 </div>
                 <div class="replies">
                     <p><strong>Reply:</strong> I use spreadsheets and the wishlist feature on this site.</p>
                 </div>
             </section>
-            <section id="topic5">
+            <section id="topic5" class="forum-topic">
                 <h3>Upcoming events</h3>
                 <div class="post">
-                    <p><strong>Posted by:</strong> EventBot</p>
+                    <span class="author">EventBot</span>
+                    <span class="date">Oct 5, 2025</span>
                     <p>Post here about upcoming FFXI events!</p>
                 </div>
                 <div class="replies">
