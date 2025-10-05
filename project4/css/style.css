@@ -98,7 +98,10 @@
     color: #ffc107;
     text-align: center;
     word-break: break-word;
-    white-space: pre-line;
+    white-space: normal;
+    overflow-wrap: break-word;
+    height: auto;
+    min-height: 2.2em;
 }
 #save-gearswap-btn {
     background: #ffc107;
