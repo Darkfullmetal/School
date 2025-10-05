@@ -1,3 +1,115 @@
+/* Wishlist Page Layout - Two Column Grid */
+.wishlist-main-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: flex-start;
+    margin-top: 30px;
+}
+
+.wishlist-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.wishlist-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.wishlist-list {
+    margin-top: 20px;
+    padding-left: 30px;
+    font-size: 1.1em;
+    background: #232323;
+    border-radius: 8px;
+    min-height: 40px;
+    width: 100%;
+    max-width: 350px;
+}
+
+#wishlist-form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    max-width: 350px;
+}
+
+.wishlist-list li {
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.gearswap-set-grid {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 400px;
+}
+
+#gearswap-form {
+    margin-bottom: 10px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.gearswap-set-block {
+    margin-bottom: 18px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.gearswap-grid-table {
+    border-collapse: collapse;
+    margin-bottom: 8px;
+    width: 100%;
+    background: #222;
+    color: #fff;
+    border-radius: 6px;
+    overflow: hidden;
+}
+.gearswap-grid-table th {
+    background: #333;
+    color: #ffc107;
+    font-size: 1.1em;
+    padding: 6px 0;
+    text-align: center;
+}
+.gearswap-grid-table td {
+    border: 1px solid #444;
+    padding: 4px;
+    text-align: center;
+}
+.gearswap-grid-table input[type="text"] {
+    width: 90%;
+    padding: 3px;
+    font-size: 0.95em;
+    border-radius: 3px;
+    border: 1px solid #888;
+    background: #111;
+    color: #ffc107;
+    text-align: center;
+}
+#save-gearswap-btn {
+    background: #ffc107;
+    color: #222;
+    border: none;
+    border-radius: 4px;
+    padding: 7px 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+#gearswap-save-status {
+    font-size: 1em;
+    font-weight: bold;
+}
 /* Wishlist Section */
 .wishlist-list {
     margin-top: 20px;
