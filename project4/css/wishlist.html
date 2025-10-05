@@ -61,18 +61,39 @@
                 <option value="Rune Fencer">Rune Fencer</option>
             </select>
         </form>
-        <table class="jobs-table" id="gearswap-table">
-            <thead>
-                <tr><th>Set Name</th><th>Head</th><th>Body</th><th>Hands</th><th>Legs</th><th>Feet</th></tr>
-            </thead>
-            <tbody>
-                <tr><td>TP Set</td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>WS Set</td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>PDT Set</td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>MDT Set</td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>Idle Set</td><td></td><td></td><td></td><td></td><td></td></tr>
-            </tbody>
-        </table>
+        <div class="gearswap-set-grid">
+            <table class="gearswap-grid-table">
+                <thead>
+                    <tr><th colspan="4">Blank</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text" maxlength="10" pattern="[A-Za-z0-9\-\+]*" title="Main" placeholder="Main"></td>
+                        <td><input type="text" maxlength="10" pattern="[A-Za-z0-9\-\+]*" title="Sub" placeholder="Sub"></td>
+                        <td><input type="text" maxlength="10" pattern="[A-Za-z0-9\-\+]*" title="Range" placeholder="Range"></td>
+                        <td><input type="text" maxlength="10" pattern="[A-Za-z0-9\-\+]*" title="Ammo" placeholder="Ammo"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" maxlength="10" pattern="[A-Za-z0-9\-\+]*" title="Head" placeholder="Head"></td>
+                        <td><input type="text" maxlength="10" pattern="[A-Za-z0-9\-\+]*" title="Neck" placeholder="Neck"></td>
+                        <td><input type="text" maxlength="10" pattern="[A-Za-z0-9\-\+]*" title="Ear1" placeholder="Ear1"></td>
+                        <td><input type="text" maxlength="10" pattern="[A-Za-z0-9\-\+]*" title="Ear2" placeholder="Ear2"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" maxlength="10" pattern="[A-Za-z0-9\-\+]*" title="Body" placeholder="Body"></td>
+                        <td><input type="text" maxlength="10" pattern="[A-Za-z0-9\-\+]*" title="Hands" placeholder="Hands"></td>
+                        <td><input type="text" maxlength="10" pattern="[A-Za-z0-9\-\+]*" title="Ring1" placeholder="Ring1"></td>
+                        <td><input type="text" maxlength="10" pattern="[A-Za-z0-9\-\+]*" title="Ring2" placeholder="Ring2"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" maxlength="10" pattern="[A-Za-z0-9\-\+]*" title="Back" placeholder="Back"></td>
+                        <td><input type="text" maxlength="10" pattern="[A-Za-z0-9\-\+]*" title="Waist" placeholder="Waist"></td>
+                        <td><input type="text" maxlength="10" pattern="[A-Za-z0-9\-\+]*" title="Legs" placeholder="Legs"></td>
+                        <td><input type="text" maxlength="10" pattern="[A-Za-z0-9\-\+]*" title="Feet" placeholder="Feet"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
         <script>
         // Check if user is signed in (simple localStorage flag)
         var signedIn = localStorage.getItem('signedInUser');
@@ -96,7 +117,7 @@
                 }
             });
         }
-        // Optionally, you can add JS to update gear swap sets per job in future
+    // Optionally, you can add JS to update gear swap sets per job in future
         </script>
     </main>
     <footer>
