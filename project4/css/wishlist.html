@@ -71,17 +71,38 @@
             </div>
         </div>
         <script>
-        // Require sign-in every visit and clear sign-in on page unload
-        function signOutOnLeave() {
-            localStorage.removeItem('signedInUser');
+        // Only clear sign-in when leaving the site entirely, and add 30 min timeout
+        function setSignInTimeout() {
+            localStorage.setItem('signedInUserTimeout', Date.now() + 30 * 60 * 1000);
         }
-        window.addEventListener('beforeunload', signOutOnLeave);
+        function checkSignInTimeout() {
+            var timeout = localStorage.getItem('signedInUserTimeout');
+            if (!timeout || Date.now() > parseInt(timeout)) {
+                localStorage.removeItem('signedInUser');
+                localStorage.removeItem('signedInUserTimeout');
+                window.location.href = 'signin.html';
+            }
+        }
+        // Set/refresh timeout on activity
+        document.body.addEventListener('mousemove', setSignInTimeout);
+        document.body.addEventListener('keydown', setSignInTimeout);
+        document.body.addEventListener('click', setSignInTimeout);
+        // Only clear sign-in when leaving the site (not internal navigation)
+        window.addEventListener('unload', function(e) {
+            if (!document.referrer || !document.referrer.includes(window.location.hostname)) {
+                localStorage.removeItem('signedInUser');
+                localStorage.removeItem('signedInUserTimeout');
+            }
+        });
+        // Check sign-in and timeout
         var signedIn = localStorage.getItem('signedInUser');
+        checkSignInTimeout();
         if (!signedIn) {
             window.location.href = 'signin.html';
         } else {
             document.getElementById('wishlist-form').style.display = '';
             document.getElementById('wishlist-list').style.display = '';
+            setSignInTimeout();
         }
         // Wishlist logic with remove and save
         function renderWishlist() {
