@@ -1,0 +1,196 @@
+body {
+    font-family: Verdana, Arial, sans-serif;
+    background: #222;
+    color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+}
+#wrapper {
+    max-width: 1100px;
+    margin: 30px auto;
+    background: #181818;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px #000;
+}
+header {
+    background: #111;
+    color: #ffcc00;
+    text-align: center;
+    padding: 20px 0 10px 0;
+    border-radius: 10px 10px 0 0;
+}
+nav {
+    margin: 15px 0;
+    text-align: center;
+}
+nav a {
+    color: #f2f2f2;
+    text-decoration: none;
+    margin: 0 18px;
+    font-weight: bold;
+    font-size: 1.1em;
+    padding: 4px 10px;
+    border-radius: 5px;
+    transition: background 0.2s;
+}
+nav a.active, nav a:hover {
+    background: #ffcc00;
+    color: #181818;
+}
+.search-bar {
+    margin-top: 10px;
+    padding: 6px;
+    border-radius: 5px;
+    border: none;
+    width: 200px;
+    font-size: 1em;
+}
+main {
+    display: flex;
+    gap: 20px;
+}
+.updates {
+    flex: 2 1 400px;
+    text-align: center;
+    background: #232323;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+.sidebar {
+    flex: 1 1 200px;
+    background: #232323;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+.sidebar.left, .sidebar.right {
+    flex: 1 1 180px;
+}
+.sidebar.left {
+    order: -1;
+}
+.sidebar.right {
+    order: 2;
+}
+.quick-links {
+    width: 100%;
+    text-align: center;
+    margin: 20px 0;
+}
+.jobs-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+.jobs-table th, .jobs-table td {
+    border: 1px solid #444;
+    padding: 8px;
+    text-align: center;
+}
+.wishlist-list {
+    background: #232323;
+    padding: 15px;
+    border-radius: 8px;
+}
+.discussion-board {
+    background: #232323;
+    padding: 15px;
+    border-radius: 8px;
+}
+footer {
+    background: #111;
+    color: #888;
+    text-align: center;
+    padding: 15px 0;
+    border-radius: 0 0 10px 10px;
+    margin-top: 30px;
+}
+h1, h2, h3 {
+    font-family: Verdana, Arial, sans-serif;
+    text-align: center;
+}
+h1 {
+    color: #ffcc00;
+    font-size: 2.5em;
+    margin-bottom: 0.2em;
+}
+h2 {
+    color: #ff6600;
+    font-size: 2em;
+    margin-top: 0.5em;
+}
+h3 {
+    color: #ffcc00;
+    font-size: 1.3em;
+}
+a {
+    color: #ffcc00;
+    text-decoration: none;
+}
+a:visited {
+    color: #ffcc00;
+}
+a:hover, a:focus {
+    color: #ff6600;
+    text-decoration: underline;
+}
+label {
+    display: block;
+    margin: 10px 0 5px 0;
+}
+.signin-form {
+    background: #232323;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+input[type="text"], input[type="password"], input[type="email"] {
+    width: 90%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #444;
+    background: #181818;
+    color: #f2f2f2;
+}
+button {
+    background: #ffcc00;
+    color: #181818;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+button:hover {
+    background: #ff6600;
+    color: #fff;
+}
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+}
+.logo img {
+    height: 60px;
+}
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.signin-link {
+    color: #ffcc00;
+    font-weight: bold;
+    text-decoration: none;
+    margin-right: 10px;
+}
+.update-img {
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
