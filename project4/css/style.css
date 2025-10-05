@@ -202,31 +202,40 @@ button:hover {
     margin-bottom: 30px;
     background: #181818;
     color: #fff;
-    font-size: 1rem;
+    font-size: 0.97rem;
+    box-shadow: 0 2px 8px #0002;
+    border-radius: 6px;
 }
 .forum-index th {
     background: #222;
     color: #FFD700;
-    padding: 8px;
+    padding: 8px 10px;
     border: 1px solid #444;
     text-align: left;
+    font-weight: bold;
 }
 .forum-index td {
     background: #222;
     color: #fff;
-    padding: 8px;
+    padding: 8px 10px;
     border: 1px solid #444;
+    vertical-align: middle;
+    text-align: left;
 }
 .forum-index a {
     color: #FFD700;
     font-weight: bold;
+    text-decoration: none;
 }
 .forum-index a:hover {
     color: #fff;
     text-decoration: underline;
 }
 .forum-index tr:nth-child(even) td {
-    background: #1a1a1a;
+    background: #232323;
+}
+.forum-index tr:hover td {
+    background: #333;
 }
 .forum-topics section {
     margin-bottom: 30px;
@@ -234,11 +243,15 @@ button:hover {
     background: #222;
     border-radius: 6px;
     border: 1px solid #444;
+    box-shadow: 0 2px 8px #0002;
 }
 .forum-topics h3 {
     color: #FFD700;
+    font-size: 1.1em;
+    margin-bottom: 8px;
 }
 .forum-topics .post, .forum-topics .replies {
     color: #fff;
     margin-bottom: 10px;
+    text-align: left;
 }
