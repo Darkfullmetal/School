@@ -19,6 +19,13 @@
         </nav>
     </header>
     <main>
+        <script>
+        // Check if user is signed in (simple localStorage flag)
+        var signedIn = localStorage.getItem('signedInUser');
+        if (!signedIn) {
+            window.location.href = 'signin.html';
+        }
+        </script>
         <h2>Community Discussion Forum</h2>
         <div class="forum">
             <section id="topic1">
