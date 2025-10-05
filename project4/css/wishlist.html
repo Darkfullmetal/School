@@ -20,12 +20,42 @@
     </header>
     <main>
         <h2>My Wishlist (Up to 100 Items)</h2>
-        <ol class="wishlist-list">
+        <div id="wishlist-locked" style="display:none; color:red; font-weight:bold;">You must be signed in to access your wishlist.</div>
+        <form id="wishlist-form" style="display:none;">
+            <label for="item-name">Item Name:</label>
+            <input type="text" id="item-name" name="item-name" maxlength="50" required>
+            <button type="submit">Add Item</button>
+        </form>
+        <ol class="wishlist-list" id="wishlist-list" style="display:none;">
             <li>Aegis Shield</li>
             <li>Excalibur</li>
             <li>Ochain</li>
-            <!-- Add up to 100 items -->
+            <!-- Items added by user will appear here -->
         </ol>
+        <script>
+        // Check if user is signed in (simple localStorage flag)
+        var signedIn = localStorage.getItem('signedInUser');
+        if (!signedIn) {
+            window.location.href = 'signin.html';
+        } else {
+            document.getElementById('wishlist-form').style.display = '';
+            document.getElementById('wishlist-list').style.display = '';
+        }
+        // Simple JS to add items to the wishlist
+        if (signedIn) {
+            document.getElementById('wishlist-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                var list = document.getElementById('wishlist-list');
+                var itemName = document.getElementById('item-name').value.trim();
+                if (itemName && list.children.length < 100) {
+                    var li = document.createElement('li');
+                    li.textContent = itemName;
+                    list.appendChild(li);
+                    document.getElementById('item-name').value = '';
+                }
+            });
+        }
+        </script>
     </main>
     <footer>
         <p>&copy; 2025 FFXI Gear Swap Management</p>
