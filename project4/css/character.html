@@ -28,7 +28,7 @@
         </script>
         <section>
             <h2>Jobs & Levels</h2>
-            <form class="jobs-form">
+            <form class="jobs-form" id="jobs-form">
                 <label for="job-select">Job:</label>
                 <select id="job-select" name="job">
                     <option value="Warrior">Warrior</option>
@@ -73,7 +73,32 @@
                 </select>
                 <button type="submit">Add Job</button>
             </form>
-            <!-- Display added jobs here in future with JS -->
+            <table class="jobs-table" id="added-jobs-table" style="margin-top:20px;">
+                <thead>
+                    <tr><th>Job</th><th>Level</th><th>Gear Swap</th><th>Wishlist</th></tr>
+                </thead>
+                <tbody id="added-jobs-body">
+                </tbody>
+            </table>
+            <script>
+            // Add job to table with links
+            document.getElementById('jobs-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                var job = document.getElementById('job-select').value;
+                var level = document.getElementById('level-select').value;
+                var tbody = document.getElementById('added-jobs-body');
+                // Prevent duplicate jobs
+                for (var i = 0; i < tbody.children.length; i++) {
+                    if (tbody.children[i].children[0].textContent === job) return;
+                }
+                var tr = document.createElement('tr');
+                tr.innerHTML = '<td>' + job + '</td>' +
+                    '<td>' + level + '</td>' +
+                    '<td><a href="wishlist.html?job=' + encodeURIComponent(job) + '#gearswap">Gear Swap</a></td>' +
+                    '<td><a href="wishlist.html?job=' + encodeURIComponent(job) + '#wishlist">Wishlist</a></td>';
+                tbody.appendChild(tr);
+            });
+            </script>
         </section>
         <section>
             <h2>Mission Status</h2>
