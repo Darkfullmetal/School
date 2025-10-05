@@ -71,7 +71,11 @@
             </div>
         </div>
         <script>
-        // Check if user is signed in (simple localStorage flag)
+        // Require sign-in every visit and clear sign-in on page unload
+        function signOutOnLeave() {
+            localStorage.removeItem('signedInUser');
+        }
+        window.addEventListener('beforeunload', signOutOnLeave);
         var signedIn = localStorage.getItem('signedInUser');
         if (!signedIn) {
             window.location.href = 'signin.html';
@@ -206,4 +210,3 @@
 </div>
 </body>
 </html>
-
