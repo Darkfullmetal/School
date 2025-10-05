@@ -25,12 +25,11 @@
             <label for="item-name">Item Name:</label>
             <input type="text" id="item-name" name="item-name" maxlength="50" required>
             <button type="submit">Add Item</button>
+            <button id="save-wishlist-btn" type="button" style="margin-left:10px;">Save Wishlist</button>
+            <span id="wishlist-save-status" style="margin-left:10px;color:green;display:none;">Saved!</span>
         </form>
         <ol class="wishlist-list" id="wishlist-list" style="display:none;">
-            <li>Aegis Shield</li>
-            <li>Excalibur</li>
-            <li>Ochain</li>
-            <!-- Items added by user will appear here -->
+            <!-- Items will be rendered by JS -->
         </ol>
 
         <h2>Gear Swap Sets</h2>
@@ -75,18 +74,54 @@
             document.getElementById('wishlist-form').style.display = '';
             document.getElementById('wishlist-list').style.display = '';
         }
-        // Simple JS to add items to the wishlist
+        // Wishlist logic with remove and save
+        function renderWishlist() {
+            const list = document.getElementById('wishlist-list');
+            list.innerHTML = '';
+            let items = JSON.parse(localStorage.getItem('wishlistItems') || '[]');
+            items.forEach((item, idx) => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                // Remove button
+                const btn = document.createElement('button');
+                btn.textContent = 'Remove';
+                btn.type = 'button';
+                btn.style.marginLeft = '10px';
+                btn.onclick = function() {
+                    items.splice(idx, 1);
+                    localStorage.setItem('wishlistItems', JSON.stringify(items));
+                    renderWishlist();
+                };
+                li.appendChild(btn);
+                list.appendChild(li);
+            });
+        }
+
         if (signedIn) {
+            // Initial render
+            renderWishlist();
+            // Add item
             document.getElementById('wishlist-form').addEventListener('submit', function(e) {
                 e.preventDefault();
-                var list = document.getElementById('wishlist-list');
                 var itemName = document.getElementById('item-name').value.trim();
-                if (itemName && list.children.length < 100) {
-                    var li = document.createElement('li');
-                    li.textContent = itemName;
-                    list.appendChild(li);
+                let items = JSON.parse(localStorage.getItem('wishlistItems') || '[]');
+                if (itemName && items.length < 100) {
+                    items.push(itemName);
+                    localStorage.setItem('wishlistItems', JSON.stringify(items));
                     document.getElementById('item-name').value = '';
+                    renderWishlist();
                 }
+            });
+            // Save wishlist
+            document.getElementById('save-wishlist-btn').addEventListener('click', function() {
+                let items = [];
+                const list = document.getElementById('wishlist-list');
+                for (let i = 0; i < list.children.length; i++) {
+                    items.push(list.children[i].childNodes[0].nodeValue.trim());
+                }
+                localStorage.setItem('wishlistItems', JSON.stringify(items));
+                document.getElementById('wishlist-save-status').style.display = '';
+                setTimeout(() => { document.getElementById('wishlist-save-status').style.display = 'none'; }, 1500);
             });
         }
         // Per-job gear swap sets logic
