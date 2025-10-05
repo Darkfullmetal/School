@@ -16,6 +16,7 @@
             <a href="discussion.html">Discussion</a>
             <a href="tips.html">Tips/Links</a>
             <a href="signin.html">Sign In/Register</a>
+            <a href="#" id="signout-link" style="display:none; color:#e74c3c; font-weight:bold; margin-left:20px;">Sign Out</a>
         </nav>
     </header>
     <main>
@@ -87,12 +88,10 @@
         document.body.addEventListener('mousemove', setSignInTimeout);
         document.body.addEventListener('keydown', setSignInTimeout);
         document.body.addEventListener('click', setSignInTimeout);
-        // Only clear sign-in when leaving the site (not internal navigation)
-        window.addEventListener('unload', function(e) {
-            if (!document.referrer || !document.referrer.includes(window.location.hostname)) {
-                localStorage.removeItem('signedInUser');
-                localStorage.removeItem('signedInUserTimeout');
-            }
+        // Always sign out when leaving the page
+        window.addEventListener('beforeunload', function() {
+            localStorage.removeItem('signedInUser');
+            localStorage.removeItem('signedInUserTimeout');
         });
         // Check sign-in and timeout
         var signedIn = localStorage.getItem('signedInUser');
@@ -103,6 +102,15 @@
             document.getElementById('wishlist-form').style.display = '';
             document.getElementById('wishlist-list').style.display = '';
             setSignInTimeout();
+            // Show sign out link
+            var signoutLink = document.getElementById('signout-link');
+            signoutLink.style.display = '';
+            signoutLink.onclick = function(e) {
+                e.preventDefault();
+                localStorage.removeItem('signedInUser');
+                localStorage.removeItem('signedInUserTimeout');
+                window.location.href = 'signin.html';
+            };
         }
         // Wishlist logic with remove and save
         function renderWishlist() {
