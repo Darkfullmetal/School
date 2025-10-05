@@ -19,6 +19,13 @@
         </nav>
     </header>
     <main>
+        <script>
+        // Check if user is signed in (simple localStorage flag)
+        var signedIn = localStorage.getItem('signedInUser');
+        if (!signedIn) {
+            window.location.href = 'signin.html';
+        }
+        </script>
         <section>
             <h2>Jobs & Levels</h2>
             <form class="jobs-form">
