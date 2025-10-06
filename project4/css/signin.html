@@ -13,9 +13,9 @@
             <a href="index.html">Home</a>
             <a href="character.html">Character</a>
             <a href="wishlist.html">Wishlist</a>
-            <a href="discussion.html">Discussion</a>
             <a href="tips.html">Tips/Links</a>
             <a href="signin.html" class="active">Sign In/Register</a>
+            <a href="#" id="signout-link" style="display:none; color:#e74c3c; font-weight:bold; position:absolute; right:30px; top:30px;">Sign Out</a>
         </nav>
     </header>
     <main>
@@ -27,6 +27,40 @@
             <p>Don't have an account? <a href="register.html">Register here</a></p>
         </form>
         <script>
+        // Session timeout and sign out logic
+        function setSignInTimeout() {
+            localStorage.setItem('signedInUserTimeout', Date.now() + 30 * 60 * 1000);
+        }
+        function checkSignInTimeout() {
+            var timeout = localStorage.getItem('signedInUserTimeout');
+            if (!timeout || Date.now() > parseInt(timeout)) {
+                localStorage.removeItem('signedInUser');
+                localStorage.removeItem('signedInUserTimeout');
+            }
+        }
+        document.body.addEventListener('mousemove', setSignInTimeout);
+        document.body.addEventListener('keydown', setSignInTimeout);
+        document.body.addEventListener('click', setSignInTimeout);
+        window.addEventListener('unload', function(e) {
+            if (!document.referrer || !document.referrer.includes(window.location.hostname)) {
+                localStorage.removeItem('signedInUser');
+                localStorage.removeItem('signedInUserTimeout');
+            }
+        });
+        // Show sign out link if signed in
+        var signedIn = localStorage.getItem('signedInUser');
+        checkSignInTimeout();
+        if (signedIn) {
+            setSignInTimeout();
+            var signoutLink = document.getElementById('signout-link');
+            signoutLink.style.display = '';
+            signoutLink.onclick = function(e) {
+                e.preventDefault();
+                localStorage.removeItem('signedInUser');
+                localStorage.removeItem('signedInUserTimeout');
+                window.location.href = 'signin.html';
+            };
+        }
         // Sign in flow: set signedInUser in localStorage and redirect
         document.getElementById('signin-form').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -35,6 +69,7 @@
             if (username && password) {
                 // Simulate sign-in (no backend)
                 localStorage.setItem('signedInUser', username);
+                setSignInTimeout();
                 window.location.href = 'character.html';
             }
         });
