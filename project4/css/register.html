@@ -15,6 +15,71 @@
             <a href="wishlist.html">Wishlist</a>
             <a href="tips.html">Tips/Links</a>
             <a href="signin.html">Sign In/Register</a>
+        </nav>
+    </header>
+    <main>
+        <form id="register-form" style="max-width:400px;margin:40px auto;">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required maxlength="32"><br><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required maxlength="32"><br><br>
+            <button type="submit">Register</button>
+            <div id="register-status" style="color:red;margin-top:10px;"></div>
+        </form>
+        <script>
+        // Store user data locally and redirect to Character page after successful registration
+        function getUsers() {
+            return JSON.parse(localStorage.getItem('users') || '[]');
+        }
+        function saveUsers(users) {
+            localStorage.setItem('users', JSON.stringify(users));
+        }
+        document.getElementById('register-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var username = document.getElementById('username').value.trim();
+            var password = document.getElementById('password').value;
+            var status = document.getElementById('register-status');
+            if (!username || !password) {
+                status.textContent = 'Please enter a username and password.';
+                return;
+            }
+            var users = getUsers();
+            if (users.some(u => u.username === username)) {
+                status.textContent = 'Username already exists.';
+                return;
+            }
+            users.push({ username: username, password: password });
+            saveUsers(users);
+            status.style.color = 'green';
+            status.textContent = 'Registration successful! Redirecting...';
+            setTimeout(function() {
+                window.location.href = 'character.html';
+            }, 1000);
+        });
+        </script>
+    </main>
+    <footer>
+        <p>&copy; 2025 FFXI Gear Swap Management</p>
+    </footer>
+</div>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register - FFXI Gear Swap Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="wrapper">
+    <header>
+        <h1>Register</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="character.html">Character</a>
+            <a href="wishlist.html">Wishlist</a>
+            <a href="tips.html">Tips/Links</a>
+            <a href="signin.html">Sign In/Register</a>
             <a href="#" id="signout-link">Sign Out</a>
         </nav>
     </header>
