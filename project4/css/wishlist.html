@@ -101,7 +101,7 @@ if (!signedIn) {
     document.getElementById('wishlist-list').style.display = '';
     setSignInTimeout();
     var signoutLink = document.getElementById('signout-link');
-    signoutLink.style.display = '';
+    signoutLink.classList.add('show-signout');
     signoutLink.onclick = function(e) {
         e.preventDefault();
         localStorage.removeItem('signedInUser');
