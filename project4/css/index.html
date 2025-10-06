@@ -11,7 +11,7 @@
         <div class="top-bar">
             <div class="logo">
                 <!-- Replace with your logo image if available -->
-                <img src="https://raw.githubusercontent.com/Darkfullmetal/School/refs/heads/main/project4/images/FFXIbanner.jpg" alt="FFXI Gear Swap Logo" style="height:100px;">
+                <img src="https://raw.githubusercontent.com/Darkfullmetal/School/refs/heads/main/project4/images/FFXIbanner.jpg" alt="FFXI Gear Swap Logo" style="height:60px;">
                     <span class="ffxi-gearswap-header">FFXI Gearswap</span>
             </div>
             <div class="header-right">
@@ -55,7 +55,7 @@
         if (signedIn) {
             setSignInTimeout();
             var signoutLink = document.getElementById('signout-link');
-            signoutLink.style.display = '';
+            signoutLink.classList.add('show-signout');
             signoutLink.onclick = function(e) {
                 e.preventDefault();
                 localStorage.removeItem('signedInUser');
@@ -75,7 +75,7 @@
             </ul>
         </aside>
         <section class="updates">
-            <img src="update-image.jpg" alt="FFXI Update" class="update-img" style="width:100%;max-width:500px;display:block;margin:0 auto 15px auto;">
+            <img src="https://raw.githubusercontent.com/Darkfullmetal/School/refs/heads/main/project4/images/octoberupdate.jpg" alt="FFXI Update" class="update-img" style="width:100%;max-width:500px;display:block;margin:0 auto 15px auto;">
             <h2>Weekly/Monthly Update</h2>
             <p>Latest update: Ambuscade rotation for October! <br>
             Tip: Use BGWiki for mission guides and gear info.</p>
@@ -97,6 +97,3 @@
 </div>
 </body>
 </html>
-
-
-
