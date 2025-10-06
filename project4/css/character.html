@@ -16,14 +16,46 @@
             <a href="discussion.html">Discussion</a>
             <a href="tips.html">Tips/Links</a>
             <a href="signin.html">Sign In/Register</a>
+            <a href="#" id="signout-link" style="display:none; color:#e74c3c; font-weight:bold; position:absolute; right:30px; top:30px;">Sign Out</a>
         </nav>
     </header>
     <main>
         <script>
-        // Check if user is signed in (simple localStorage flag)
+        // Only character.html and wishlist.html require sign-in. Sign out logic and session timeout remain consistent.
+        function setSignInTimeout() {
+            localStorage.setItem('signedInUserTimeout', Date.now() + 30 * 60 * 1000);
+        }
+        function checkSignInTimeout() {
+            var timeout = localStorage.getItem('signedInUserTimeout');
+            if (!timeout || Date.now() > parseInt(timeout)) {
+                localStorage.removeItem('signedInUser');
+                localStorage.removeItem('signedInUserTimeout');
+                window.location.href = 'signin.html';
+            }
+        }
+        document.body.addEventListener('mousemove', setSignInTimeout);
+        document.body.addEventListener('keydown', setSignInTimeout);
+        document.body.addEventListener('click', setSignInTimeout);
+        window.addEventListener('unload', function(e) {
+            if (!document.referrer || !document.referrer.includes(window.location.hostname)) {
+                localStorage.removeItem('signedInUser');
+                localStorage.removeItem('signedInUserTimeout');
+            }
+        });
         var signedIn = localStorage.getItem('signedInUser');
+        checkSignInTimeout();
         if (!signedIn) {
             window.location.href = 'signin.html';
+        } else {
+            setSignInTimeout();
+            var signoutLink = document.getElementById('signout-link');
+            signoutLink.style.display = '';
+            signoutLink.onclick = function(e) {
+                e.preventDefault();
+                localStorage.removeItem('signedInUser');
+                localStorage.removeItem('signedInUserTimeout');
+                window.location.href = 'signin.html';
+            };
         }
         </script>
         <section>
