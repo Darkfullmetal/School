@@ -20,8 +20,7 @@
     </header>
     <main>
         <div class="wishlist-main-grid">
-            <div class="wishlist-left" style="display: flex; align-items: flex-start;">
-                <img src="https://raw.githubusercontent.com/Darkfullmetal/School/refs/heads/main/project4/images/ffxiclasses.jpg" alt="FFXI Classes" style="max-width:120px; margin-right:18px; border-radius:8px; box-shadow:0 0 8px #000;">
+            <div class="wishlist-left">
                 <h2>My Wishlist (Up to 100 Items)</h2>
                 <div id="wishlist-locked" style="display:none; color:red; font-weight:bold;">You must be signed in to access your wishlist.</div>
                 <form id="wishlist-form" style="display:none;">
@@ -32,14 +31,11 @@
                     <span id="wishlist-save-status" style="margin-left:10px;color:green;display:none;">Saved!</span>
                 </form>
                 <ol class="wishlist-list" id="wishlist-list" style="display:none; margin-top:20px;">
-                    <!-- Items will be rendered by JS -->
+                    <!-- Wishlist items will be dynamically added here -->
                 </ol>
             </div>
             <div class="wishlist-right">
-                <div style="display: flex; align-items: flex-start;">
-                    <img src="https://raw.githubusercontent.com/Darkfullmetal/School/refs/heads/main/project4/images/ffxiclasses.jpg" alt="FFXI Classes" style="max-width:120px; margin-right:18px; border-radius:8px; box-shadow:0 0 8px #000;">
-                    <h2>Gear Swap Sets</h2>
-                </div>
+                <h2>Gear Swap Sets</h2>
                 <form id="gearswap-form" style="display:inline;">
                     <label for="gs-job-select">Select Job:</label>
                     <select id="gs-job-select" name="gs-job">
@@ -70,7 +66,7 @@
                 <div class="gearswap-set-grid">
                     <div id="gearswap-sets-container"></div>
                     <button id="save-gearswap-btn" type="button">Save Sets for Job</button>
-                    <div id="gearswap-save-status" style="margin-top:10px;color:green;display:none;">Saved!</div>
+                            <img src="https://raw.githubusercontent.com/Darkfullmetal/School/refs/heads/main/project4/images/ffxiclasses.jpg" alt="FFXI Classes" style="max-width:120px; margin-left:18px; border-radius:8px; box-shadow:0 0 8px #000; float:right;">
                 </div>
             </div>
         </div>
