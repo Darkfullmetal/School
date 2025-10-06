@@ -11,8 +11,8 @@
         <h1>Wishlist</h1>
         <nav>
             <a href="index.html">Home</a>
-            <a href="character.html">Character</a>
-            <a href="wishlist.html" class="active">Wishlist</a>
+            <a href="#" id="character-link">Character</a>
+            <a href="#" id="wishlist-link" class="active">Wishlist</a>
             <a href="tips.html">Tips/Links</a>
             <a href="signin.html">Sign In/Register</a>
             <a href="#" id="signout-link">Sign Out</a>
@@ -20,7 +20,8 @@
     </header>
     <main>
         <div class="wishlist-main-grid">
-            <div class="wishlist-left">
+            <div class="wishlist-left" style="display: flex; align-items: flex-start;">
+                <img src="https://raw.githubusercontent.com/Darkfullmetal/School/refs/heads/main/project4/images/ffxiclasses.jpg" alt="FFXI Classes" style="max-width:120px; margin-right:18px; border-radius:8px; box-shadow:0 0 8px #000;">
                 <h2>My Wishlist (Up to 100 Items)</h2>
                 <div id="wishlist-locked" style="display:none; color:red; font-weight:bold;">You must be signed in to access your wishlist.</div>
                 <form id="wishlist-form" style="display:none;">
@@ -35,7 +36,10 @@
                 </ol>
             </div>
             <div class="wishlist-right">
-                <h2>Gear Swap Sets</h2>
+                <div style="display: flex; align-items: flex-start;">
+                    <img src="https://raw.githubusercontent.com/Darkfullmetal/School/refs/heads/main/project4/images/ffxiclasses.jpg" alt="FFXI Classes" style="max-width:120px; margin-right:18px; border-radius:8px; box-shadow:0 0 8px #000;">
+                    <h2>Gear Swap Sets</h2>
+                </div>
                 <form id="gearswap-form" style="display:inline;">
                     <label for="gs-job-select">Select Job:</label>
                     <select id="gs-job-select" name="gs-job">
@@ -106,7 +110,7 @@ if (!signedIn) {
         e.preventDefault();
         localStorage.removeItem('signedInUser');
         localStorage.removeItem('signedInUserTimeout');
-        window.location.href = 'signin.html';
+        window.location.href = 'index.html';
     };
 }
         // Wishlist logic with remove and save
@@ -229,6 +233,23 @@ if (!signedIn) {
         // Initial load
         loadGearSetsForJob(jobSelect.value);
         </script>
+<script>
+// Intercept Character/Wishlist clicks to show sign-in if not signed in
+document.getElementById('character-link').onclick = function(e) {
+    var signedIn = localStorage.getItem('signedInUser');
+    if (!signedIn) {
+        e.preventDefault();
+        window.location.href = 'signin.html';
+    }
+};
+document.getElementById('wishlist-link').onclick = function(e) {
+    var signedIn = localStorage.getItem('signedInUser');
+    if (!signedIn) {
+        e.preventDefault();
+        window.location.href = 'signin.html';
+    }
+};
+</script>
     </main>
     <footer>
         <p>&copy; 2025 FFXI Gear Swap Management</p>
