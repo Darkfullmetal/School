@@ -1,3 +1,18 @@
+/* Sign Out link styling */
+#signout-link {
+    display: none;
+    color: #e74c3c;
+    font-weight: bold;
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    background: none;
+    border: none;
+    font-size: 1.08em;
+    cursor: pointer;
+    text-decoration: none;
+    z-index: 10;
+}
 body {
     font-family: Verdana, Arial, sans-serif;
     background: #222;
