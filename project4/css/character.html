@@ -11,8 +11,8 @@
         <h1>Character Page</h1>
         <nav>
             <a href="index.html">Home</a>
-            <a href="character.html" class="active">Character</a>
-            <a href="wishlist.html">Wishlist</a>
+            <a href="#" id="character-link" class="active">Character</a>
+            <a href="#" id="wishlist-link">Wishlist</a>
             <a href="tips.html">Tips/Links</a>
             <a href="signin.html">Sign In/Register</a>
             <a href="#" id="signout-link">Sign Out</a>
@@ -48,15 +48,30 @@
         } else {
             setSignInTimeout();
             var signoutLink = document.getElementById('signout-link');
-            signoutLink.style.display = '';
+            signoutLink.classList.add('show-signout');
             signoutLink.onclick = function(e) {
                 e.preventDefault();
                 localStorage.removeItem('signedInUser');
                 localStorage.removeItem('signedInUserTimeout');
-                window.location.href = 'signin.html';
+                window.location.href = 'index.html';
             };
         }
         </script>
+        // Intercept Character/Wishlist clicks to show sign-in if not signed in
+        document.getElementById('character-link').onclick = function(e) {
+            var signedIn = localStorage.getItem('signedInUser');
+            if (!signedIn) {
+                e.preventDefault();
+                window.location.href = 'signin.html';
+            }
+        };
+        document.getElementById('wishlist-link').onclick = function(e) {
+            var signedIn = localStorage.getItem('signedInUser');
+            if (!signedIn) {
+                e.preventDefault();
+                window.location.href = 'signin.html';
+            }
+        };
         <section>
             <h2>Jobs & Levels</h2>
             <form class="jobs-form" id="jobs-form">
