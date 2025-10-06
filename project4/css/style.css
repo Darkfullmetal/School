@@ -1,3 +1,17 @@
+/* Wishlist header images styling */
+.wishlist-header-images {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+.wishlist-header-img {
+    height: 100px;
+    width: auto;
+    margin: 0 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 8px #000;
+}
 /* Show signout link only when signed in */
 .show-signout {
     display: inline !important;
