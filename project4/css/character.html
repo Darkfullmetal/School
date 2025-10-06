@@ -57,6 +57,7 @@
             };
         }
         </script>
+        <script>
         // Intercept Character/Wishlist clicks to show sign-in if not signed in
         document.getElementById('character-link').onclick = function(e) {
             var signedIn = localStorage.getItem('signedInUser');
@@ -72,6 +73,8 @@
                 window.location.href = 'signin.html';
             }
         };
+        </script>
+    
         <section>
             <h2>Jobs & Levels</h2>
             <form class="jobs-form" id="jobs-form">
