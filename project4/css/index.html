@@ -15,6 +15,7 @@
             </div>
             <div class="header-right">
                 <a href="signin.html" class="signin-link">Sign In/Register</a>
+                <a href="#" id="signout-link" style="display:none; color:#e74c3c; font-weight:bold; margin-left:20px;">Sign Out</a>
                 <input type="search" placeholder="Search..." class="search-bar">
             </div>
         </div>
@@ -22,11 +23,46 @@
             <a href="index.html" class="active">Home</a>
             <a href="character.html">Character</a>
             <a href="wishlist.html">Wishlist</a>
-            <a href="discussion.html">Discussion</a>
             <a href="tips.html">Tips/Links</a>
         </nav>
     </header>
     <main>
+        <script>
+        // Site-wide sign-in logic, but only character.html and wishlist.html require sign-in
+        function setSignInTimeout() {
+            localStorage.setItem('signedInUserTimeout', Date.now() + 30 * 60 * 1000);
+        }
+        function checkSignInTimeout() {
+            var timeout = localStorage.getItem('signedInUserTimeout');
+            if (!timeout || Date.now() > parseInt(timeout)) {
+                localStorage.removeItem('signedInUser');
+                localStorage.removeItem('signedInUserTimeout');
+            }
+        }
+        document.body.addEventListener('mousemove', setSignInTimeout);
+        document.body.addEventListener('keydown', setSignInTimeout);
+        document.body.addEventListener('click', setSignInTimeout);
+        window.addEventListener('unload', function(e) {
+            if (!document.referrer || !document.referrer.includes(window.location.hostname)) {
+                localStorage.removeItem('signedInUser');
+                localStorage.removeItem('signedInUserTimeout');
+            }
+        });
+        // Show sign out link if signed in
+        var signedIn = localStorage.getItem('signedInUser');
+        checkSignInTimeout();
+        if (signedIn) {
+            setSignInTimeout();
+            var signoutLink = document.getElementById('signout-link');
+            signoutLink.style.display = '';
+            signoutLink.onclick = function(e) {
+                e.preventDefault();
+                localStorage.removeItem('signedInUser');
+                localStorage.removeItem('signedInUserTimeout');
+                window.location.href = 'signin.html';
+            };
+        }
+        </script>
         <aside class="sidebar left">
             <h3>Quick Tips</h3>
             <ul>
@@ -40,17 +76,17 @@
         <section class="updates">
             <img src="update-image.jpg" alt="FFXI Update" class="update-img" style="width:100%;max-width:500px;display:block;margin:0 auto 15px auto;">
             <h2>Weekly/Monthly Update</h2>
-            <p>Latest update: Ambuscade rotation for July! <br>
+            <p>Latest update: Ambuscade rotation for October! <br>
             Tip: Use BGWiki for mission guides and gear info.</p>
         </section>
         <aside class="sidebar right">
-            <h3>Hot Topics</h3>
+            <h3>Hot Takes</h3>
             <ul>
-                <li>Topic #1: Best gear for Rune Fencer</li>
-                <li>Topic #2: How to farm Omen efficiently</li>
-                <li>Topic #3: Job-specific gear swap macros</li>
-                <li>Topic #4: Wishlist management tips</li>
-                <li>Topic #5: Upcoming events</li>
+                <li>While slow, Limbus is worth the time. - Player123</li>
+                <li>Omen card farming is only worth it when the Campaign is active. - Player456</li>
+                <li>Job-specific gear swap macros are essential for efficiency. - Player789</li>
+                <li>Minimum of 5 geared jobs are required for optimal performance. - Player101</li>
+                <li>Always keep your gear sets updated with the latest patches. - Player202</li>
             </ul>
         </aside>
     </main>
