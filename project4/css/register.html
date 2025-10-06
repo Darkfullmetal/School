@@ -15,17 +15,24 @@
             <a href="wishlist.html">Wishlist</a>
             <a href="tips.html">Tips/Links</a>
             <a href="signin.html">Sign In/Register</a>
+            <a href="#" id="signout-link">Sign Out</a>
         </nav>
     </header>
     <main>
         <form id="register-form" style="max-width:400px;margin:40px auto;">
+            <h2 style="color: #ff6600; margin-bottom: 10px;">Create an Account</h2>
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required maxlength="32"><br><br>
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required maxlength="32"><br><br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required maxlength="64"><br><br>
+            <label for="character">Character Name:</label>
+            <input type="text" id="character" name="character" required maxlength="32"><br><br>
             <button type="submit">Register</button>
             <div id="register-status" style="color:red;margin-top:10px;"></div>
         </form>
+        <p>Already have an account? <a href="signin.html">Sign in here</a></p>
         <script>
         // Store user data locally and redirect to Character page after successful registration
         function getUsers() {
@@ -38,9 +45,11 @@
             e.preventDefault();
             var username = document.getElementById('username').value.trim();
             var password = document.getElementById('password').value;
+            var email = document.getElementById('email').value.trim();
+            var character = document.getElementById('character').value.trim();
             var status = document.getElementById('register-status');
-            if (!username || !password) {
-                status.textContent = 'Please enter a username and password.';
+            if (!username || !password || !email || !character) {
+                status.textContent = 'Please fill in all fields.';
                 return;
             }
             var users = getUsers();
@@ -48,7 +57,7 @@
                 status.textContent = 'Username already exists.';
                 return;
             }
-            users.push({ username: username, password: password });
+            users.push({ username: username, password: password, email: email, character: character });
             saveUsers(users);
             status.style.color = 'green';
             status.textContent = 'Registration successful! Redirecting...';
@@ -56,6 +65,39 @@
                 window.location.href = 'character.html';
             }, 1000);
         });
+        // Show sign out link if signed in
+        var signedIn = localStorage.getItem('signedInUser');
+        function setSignInTimeout() {
+            localStorage.setItem('signedInUserTimeout', Date.now() + 30 * 60 * 1000);
+        }
+        function checkSignInTimeout() {
+            var timeout = localStorage.getItem('signedInUserTimeout');
+            if (!timeout || Date.now() > parseInt(timeout)) {
+                localStorage.removeItem('signedInUser');
+                localStorage.removeItem('signedInUserTimeout');
+            }
+        }
+        document.body.addEventListener('mousemove', setSignInTimeout);
+        document.body.addEventListener('keydown', setSignInTimeout);
+        document.body.addEventListener('click', setSignInTimeout);
+        window.addEventListener('unload', function(e) {
+            if (!document.referrer || !document.referrer.includes(window.location.hostname)) {
+                localStorage.removeItem('signedInUser');
+                localStorage.removeItem('signedInUserTimeout');
+            }
+        });
+        checkSignInTimeout();
+        if (signedIn) {
+            setSignInTimeout();
+            var signoutLink = document.getElementById('signout-link');
+            signoutLink.classList.add('show-signout');
+            signoutLink.onclick = function(e) {
+                e.preventDefault();
+                localStorage.removeItem('signedInUser');
+                localStorage.removeItem('signedInUserTimeout');
+                window.location.href = 'signin.html';
+            };
+        }
         </script>
     </main>
     <footer>
@@ -63,7 +105,7 @@
     </footer>
 </div>
 </body>
-</html><!DOCTYPE html>
+</html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
