@@ -1,5 +1,6 @@
-#show-signout {
-    display: inline;
+/* Show signout link only when signed in */
+.show-signout {
+    display: inline !important;
 }
 /* FFXI Gearswap header text styling */
 .ffxi-gearswap-header {
