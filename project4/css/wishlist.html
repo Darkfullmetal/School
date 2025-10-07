@@ -114,10 +114,14 @@ if (!signedIn) {
     };
 }
         // Wishlist logic with remove and save
+        function getUserKey(key) {
+            var user = localStorage.getItem('signedInUser');
+            return user ? key + '_' + user : key;
+        }
         function renderWishlist() {
             const list = document.getElementById('wishlist-list');
             list.innerHTML = '';
-            let items = JSON.parse(localStorage.getItem('wishlistItems') || '[]');
+            let items = JSON.parse(localStorage.getItem(getUserKey('wishlistItems')) || '[]');
             items.forEach((item, idx) => {
                 const li = document.createElement('li');
                 li.textContent = item;
@@ -128,7 +132,7 @@ if (!signedIn) {
                 btn.style.marginLeft = '10px';
                 btn.onclick = function() {
                     items.splice(idx, 1);
-                    localStorage.setItem('wishlistItems', JSON.stringify(items));
+                    localStorage.setItem(getUserKey('wishlistItems'), JSON.stringify(items));
                     renderWishlist();
                 };
                 li.appendChild(btn);
@@ -143,10 +147,10 @@ if (!signedIn) {
             document.getElementById('wishlist-form').addEventListener('submit', function(e) {
                 e.preventDefault();
                 var itemName = document.getElementById('item-name').value.trim();
-                let items = JSON.parse(localStorage.getItem('wishlistItems') || '[]');
+                let items = JSON.parse(localStorage.getItem(getUserKey('wishlistItems')) || '[]');
                 if (itemName && items.length < 100) {
                     items.push(itemName);
-                    localStorage.setItem('wishlistItems', JSON.stringify(items));
+                    localStorage.setItem(getUserKey('wishlistItems'), JSON.stringify(items));
                     document.getElementById('item-name').value = '';
                     renderWishlist();
                 }
@@ -158,7 +162,7 @@ if (!signedIn) {
                 for (let i = 0; i < list.children.length; i++) {
                     items.push(list.children[i].childNodes[0].nodeValue.trim());
                 }
-                localStorage.setItem('wishlistItems', JSON.stringify(items));
+                localStorage.setItem(getUserKey('wishlistItems'), JSON.stringify(items));
                 document.getElementById('wishlist-save-status').style.display = '';
                 setTimeout(() => { document.getElementById('wishlist-save-status').style.display = 'none'; }, 1500);
             });
@@ -193,7 +197,7 @@ if (!signedIn) {
         }
 
         function loadGearSetsForJob(job) {
-            let allSets = JSON.parse(localStorage.getItem('gearswapSets') || '{}');
+            let allSets = JSON.parse(localStorage.getItem(getUserKey('gearswapSets')) || '{}');
             let jobSets = allSets[job] || {};
             setsContainer.innerHTML = '';
             setNames.forEach(setName => {
@@ -211,7 +215,7 @@ if (!signedIn) {
         });
 
         saveBtn.addEventListener('click', function() {
-            let allSets = JSON.parse(localStorage.getItem('gearswapSets') || '{}');
+            let allSets = JSON.parse(localStorage.getItem(getUserKey('gearswapSets')) || '{}');
             let job = jobSelect.value;
             let jobSets = {};
             let setBlocks = setsContainer.getElementsByClassName('gearswap-set-block');
@@ -225,7 +229,7 @@ if (!signedIn) {
                 jobSets[setName] = setVals;
             }
             allSets[job] = jobSets;
-            localStorage.setItem('gearswapSets', JSON.stringify(allSets));
+            localStorage.setItem(getUserKey('gearswapSets'), JSON.stringify(allSets));
             saveStatus.style.display = '';
             setTimeout(() => { saveStatus.style.display = 'none'; }, 1500);
         });
@@ -257,4 +261,3 @@ document.getElementById('wishlist-link').onclick = function(e) {
 </div>
 </body>
 </html>
-
