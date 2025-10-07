@@ -134,28 +134,54 @@
                 </tbody>
             </table>
             <script>
-            // Add job to table with links
+            // Save/load jobs per user
+            function getUserKey(key) {
+                var user = localStorage.getItem('signedInUser');
+                return user ? key + '_' + user : key;
+            }
+            function renderJobsTable() {
+                var tbody = document.getElementById('added-jobs-body');
+                tbody.innerHTML = '';
+                var jobs = JSON.parse(localStorage.getItem(getUserKey('jobsList')) || '[]');
+                jobs.forEach(function(entry) {
+                    var tr = document.createElement('tr');
+                    tr.innerHTML = '<td>' + entry.job + '</td>' +
+                        '<td>' + entry.level + '</td>' +
+                        '<td><a href="wishlist.html?job=' + encodeURIComponent(entry.job) + '#gearswap">Gear Swap</a></td>' +
+                        '<td><a href="wishlist.html?job=' + encodeURIComponent(entry.job) + '#wishlist">Wishlist</a></td>';
+                    // Remove button
+                    var btn = document.createElement('button');
+                    btn.textContent = 'Remove';
+                    btn.type = 'button';
+                    btn.style.marginLeft = '10px';
+                    btn.onclick = function() {
+                        jobs = jobs.filter(j => j.job !== entry.job);
+                        localStorage.setItem(getUserKey('jobsList'), JSON.stringify(jobs));
+                        renderJobsTable();
+                    };
+                    var td = document.createElement('td');
+                    td.appendChild(btn);
+                    tr.appendChild(td);
+                    tbody.appendChild(tr);
+                });
+            }
+            renderJobsTable();
             document.getElementById('jobs-form').addEventListener('submit', function(e) {
                 e.preventDefault();
                 var job = document.getElementById('job-select').value;
                 var level = document.getElementById('level-select').value;
-                var tbody = document.getElementById('added-jobs-body');
+                var jobs = JSON.parse(localStorage.getItem(getUserKey('jobsList')) || '[]');
                 // Prevent duplicate jobs
-                for (var i = 0; i < tbody.children.length; i++) {
-                    if (tbody.children[i].children[0].textContent === job) return;
-                }
-                var tr = document.createElement('tr');
-                tr.innerHTML = '<td>' + job + '</td>' +
-                    '<td>' + level + '</td>' +
-                    '<td><a href="wishlist.html?job=' + encodeURIComponent(job) + '#gearswap">Gear Swap</a></td>' +
-                    '<td><a href="wishlist.html?job=' + encodeURIComponent(job) + '#wishlist">Wishlist</a></td>';
-                tbody.appendChild(tr);
+                if (jobs.some(j => j.job === job)) return;
+                jobs.push({job: job, level: level});
+                localStorage.setItem(getUserKey('jobsList'), JSON.stringify(jobs));
+                renderJobsTable();
             });
             </script>
         </section>
         <section>
             <h2>Mission Status</h2>
-            <form class="mission-status-form">
+            <form class="mission-status-form" id="mission-status-form">
                 <label for="rank">Nation Rank:</label>
                 <select id="rank" name="rank">
                     <option value="In Progress">In Progress</option>
@@ -197,10 +223,32 @@
                     <option value="Complete">Complete</option>
                 </select>
             </form>
+            <script>
+            // Save/load mission status per user
+            function getUserKey(key) {
+                var user = localStorage.getItem('signedInUser');
+                return user ? key + '_' + user : key;
+            }
+            function loadMissionStatus() {
+                var data = JSON.parse(localStorage.getItem(getUserKey('missionStatus')) || '{}');
+                ['rank','zilart','promathia','toa','wotg','abyssea','seekers','rhapsodies'].forEach(function(id) {
+                    if (data[id]) document.getElementById(id).value = data[id];
+                });
+            }
+            function saveMissionStatus() {
+                var data = {};
+                ['rank','zilart','promathia','toa','wotg','abyssea','seekers','rhapsodies'].forEach(function(id) {
+                    data[id] = document.getElementById(id).value;
+                });
+                localStorage.setItem(getUserKey('missionStatus'), JSON.stringify(data));
+            }
+            document.getElementById('mission-status-form').addEventListener('change', saveMissionStatus);
+            loadMissionStatus();
+            </script>
         </section>
         <section>
             <h2>Assault Checklist</h2>
-            <form class="assault-checklist-form">
+            <form class="assault-checklist-form" id="assault-checklist-form">
                 <div class="assault-list">
                     <label><input type="checkbox" name="Leujaoam Sanctum"> Leujaoam Sanctum</label><br>
                     <label><input type="checkbox" name="Periqia"> Periqia</label><br>
@@ -244,15 +292,32 @@
                     <label><input type="checkbox" name="The Road to Divadom"> The Road to Divadom</label><br>
                     <label><input type="checkbox" name="The Final Image"> The Final Image</label><br>
                     <label><input type="checkbox" name="The Salt of the Earth"> The Salt of the Earth</label><br>
-                    <label><input type="checkbox" name="The Black Coffin"> The Black Coffin</label><br>
-                    <label><input type="checkbox" name="The Swarm"> The Swarm</label><br>
-                    <label><input type="checkbox" name="The Ramparts"> The Ramparts</label><br>
-                    <label><input type="checkbox" name="The Price is Right"> The Price is Right</label><br>
-                    <label><input type="checkbox" name="The Road to Divadom"> The Road to Divadom</label><br>
-                    <label><input type="checkbox" name="The Final Image"> The Final Image</label><br>
-                    <label><input type="checkbox" name="The Salt of the Earth"> The Salt of the Earth</label><br>
                 </div>
             </form>
+            <script>
+            // Save/load assault checklist per user
+            function getUserKey(key) {
+                var user = localStorage.getItem('signedInUser');
+                return user ? key + '_' + user : key;
+            }
+            function loadAssaultChecklist() {
+                var data = JSON.parse(localStorage.getItem(getUserKey('assaultChecklist')) || '{}');
+                var checkboxes = document.querySelectorAll('#assault-checklist-form input[type="checkbox"]');
+                checkboxes.forEach(function(cb) {
+                    cb.checked = !!data[cb.name];
+                });
+            }
+            function saveAssaultChecklist() {
+                var data = {};
+                var checkboxes = document.querySelectorAll('#assault-checklist-form input[type="checkbox"]');
+                checkboxes.forEach(function(cb) {
+                    data[cb.name] = cb.checked;
+                });
+                localStorage.setItem(getUserKey('assaultChecklist'), JSON.stringify(data));
+            }
+            document.getElementById('assault-checklist-form').addEventListener('change', saveAssaultChecklist);
+            loadAssaultChecklist();
+            </script>
         </section>
     </main>
     <footer>
