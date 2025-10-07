@@ -66,11 +66,14 @@
             e.preventDefault();
             var username = document.getElementById('signin-username').value.trim();
             var password = document.getElementById('signin-password').value.trim();
-            if (username && password) {
-                // Simulate sign-in (no backend)
+            var users = JSON.parse(localStorage.getItem('users') || '[]');
+            var user = users.find(u => u.username === username && u.password === password);
+            if (user) {
                 localStorage.setItem('signedInUser', username);
                 setSignInTimeout();
                 window.location.href = 'character.html';
+            } else {
+                alert('Invalid username or password.');
             }
         });
         </script>
